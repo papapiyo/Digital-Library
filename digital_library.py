@@ -1,14 +1,84 @@
 import pandas as pd
 
 class Library():
+    """
+    Program Digital Library
+
+    A program that simulates a digital library with the following functionalities:
+        - Add book to library
+        - Update book data (title, year, quantity)
+        - Check available books
+        - Check borrowed books
+        - Borrow book
+        - Return book
+
+    The program uses a pandas DataFrame to display the book data in a table format.
+
+    Author: dani.herdiana.230885@gmail.com
+
+    Classes:
+        Library:
+            A class that represents a digital library.
+
+    Methods:
+        __init__(self)
+            Constructs a new Library object.
+
+        tambah_buku(self, judul, tahun, jumlah)
+            Adds a new book to the library.
+
+        check_data_buku(self)
+            Displays a table of available books in the library.
+
+        update_judul(self, judul, judul_baru)
+            Updates the title of a book in the library.
+
+        update_tahun(self, judul, tahun_baru)
+            Updates the year of publication of a book in the library.
+
+        update_jumlah(self, judul, jumlah_baru)
+            Updates the quantity of a book in the library.
+
+        return_index(self, judul)
+            Returns the index of a book in the data_buku list.
+
+        return_index_buku(self, judul, nama_peminjam)
+            Returns the index of a borrowed book in the buku_dipinjam list.
+
+        check_buku_dipinjam(self)
+            Displays a table of borrowed books in the library.
+
+        pinjam_buku(self, judul, nama_peminjam)
+            Allows a user to borrow a book from the library.
+
+        kembali_buku(self, judul, nama_peminjam)
+            Allows a user to return a borrowed book to the library.
+    """
+
     def __init__(self):
+        """
+        Initialize a Library object with empty data_buku and buku_dipinjam lists.
+        """
         self.data_buku = []
         self.buku_dipinjam = []
     
     def tambah_buku(self, judul, tahun, jumlah):
+        """
+        Add a new book to the library.
+
+        Parameters:
+        judul (str): The title of the book.
+        tahun (int): The year the book was published.
+        jumlah (int): The number of copies available in the library.
+        """
         self.data_buku.append([judul, tahun, jumlah])
     
     def check_data_buku(self):
+        """
+        Display the list of books available in the library.
+
+        If there are no books in the library, print "Tidak Ada Buku di Perpustakaan".
+        """
         if(len(self.data_buku)==0):
             print('Tidak Ada Buku di Perpustakaan')
         else:
@@ -17,6 +87,15 @@ class Library():
             print(data.to_markdown())
     
     def update_judul(self, judul, judul_baru):
+        """
+        Update the title of a book in the library.
+
+        Parameters:
+        judul (str): The current title of the book.
+        judul_baru (str): The new title of the book.
+
+        If the book cannot be found in the library, print "Buku Tidak Ditemukan".
+        """
         try:
             self.data_buku[self.return_index(judul)][0] = tahun_baru
             print('Data Judul Berhasil Diperbarui')
@@ -24,6 +103,15 @@ class Library():
             print('Buku Tidak Ditemukan')
 
     def update_tahun(self, judul, tahun_baru):
+        """
+        Update the publication year of a book in the library.
+
+        Parameters:
+        judul (str): The title of the book.
+        tahun_baru (int): The new publication year of the book.
+
+        If the book cannot be found in the library, print "Buku Tidak Ditemukan".
+        """
         try:
             self.data_buku[self.return_index(judul)][1] = tahun_baru
             print('Data Tahun Terbit Berhasil Diperbarui')
